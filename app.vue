@@ -21,7 +21,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const data = ref(null);
 
 onMounted(async () => {
-  const { data: result, error } = await supabase.from("names").select("*");
+  const { data: result, error } = await supabase
+    .from("subscriptions")
+    .select("*");
 
   if (error) {
     console.error("Error fetching data:", error);
