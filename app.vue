@@ -3,7 +3,8 @@
     <header>
       <h1>Subs Tracker</h1>
       <button @click="toggleDarkMode">
-        {{ isDarkMode ? "Dark Mode" : "Light Mode" }}
+        <IconsMoon v-if="isDarkMode" />
+        <IconsSun v-else />
       </button>
     </header>
     <div class="wrap-total">
@@ -50,15 +51,27 @@ header {
   }
 
   button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-    font-weight: 400;
+    display: flex;
+    padding: 0.4rem 0.4rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 56px;
     background-color: var(--surface);
     color: var(--base-text);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    transform: translateY(0);
+    transition: transform opacity 0.15s ease-in-out;
+    opacity: 0.7;
+
+    &:hover {
+      transform: translateY(4px);
+      opacity: 1;
+    }
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke: var(--base-text);
+    }
   }
 }
 
