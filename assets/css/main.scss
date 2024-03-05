@@ -1,0 +1,41 @@
+// globals
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+:root {
+  --gray100: #111111;
+  --gray200: #222222;
+  --gray300: #333333;
+  --gray400: #444444;
+  --gray500: #555555;
+  --gray600: #666666;
+  --gray700: #777777;
+  --gray800: #888888;
+  --gray900: #999999;
+}
+
+.dark-mode {
+  --base-text: var(--gray900);
+  --background: var(--gray100);
+  --surface: var(--gray200);
+}
+
+.light-mode {
+  --base-text: var(--gray100);
+  --background: #f2f2f2;
+  --surface: var(--gray900);
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  font-size: 62.5%;
+  line-height: 1.5;
+  color: var(--background);
+  background-color: var(--background);
+}
