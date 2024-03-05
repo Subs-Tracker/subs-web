@@ -19,17 +19,15 @@ const isDarkMode = ref(true);
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value;
   if (isDarkMode.value) {
-    document.body.classList.add("dark-mode");
     document.body.classList.remove("light-mode");
   } else {
     document.body.classList.add("light-mode");
-    document.body.classList.remove("dark-mode");
   }
 };
 
 onMounted(() => {
-  if (isDarkMode.value) {
-    document.body.classList.add("dark-mode");
+  if (!isDarkMode.value) {
+    document.body.classList.add("light-mode");
   }
 });
 
