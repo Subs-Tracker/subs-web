@@ -6,11 +6,12 @@
   margin: 0;
   border: 0;
   padding: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 :root {
-  --gray100: #111111;
-  --gray200: #222222;
+  --gray100: #171614;
+  --gray200: #1d1c19;
   --gray300: #333333;
   --gray400: #444444;
   --gray500: #555555;
@@ -18,14 +19,18 @@
   --gray700: #777777;
   --gray800: #888888;
   --gray900: #999999;
+  --white: #ffffff;
 
-  --base-text: var(--gray900);
+  --base-text: var(--white);
+  --secondary-text: var(--gray900);
   --background: var(--gray100);
   --surface: var(--gray200);
+  --border: var(--gray300);
 }
 
 .light-mode {
   --base-text: var(--gray100);
+  --secondary-text: var(--gray300);
   --background: #f2f2f2;
   --surface: var(--gray900);
 }
@@ -34,6 +39,12 @@ body {
   font-family: "Work Sans", sans-serif;
   font-size: 62.5%;
   line-height: 1.5;
-  color: var(--background);
+  color: var(--base-text);
   background-color: var(--background);
+}
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.6rem;
 }

@@ -31,19 +31,13 @@ onMounted(() => {
   }
 });
 
-const { data } = useSupabase("services");
+const { data } = useSupabase();
 const totalCost = computed(() => {
   return data.value.reduce((total, item) => total + item.service_cost, 0);
 });
 </script>
 
 <style lang="scss">
-.page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
 header {
   display: flex;
   align-items: center;
@@ -51,7 +45,8 @@ header {
   margin-bottom: 2rem;
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.2rem;
+    color: var(--base-text);
   }
 
   button {
@@ -60,7 +55,8 @@ header {
     font-weight: 400;
     border: none;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--surface);
+    color: var(--base-text);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }
@@ -68,17 +64,20 @@ header {
 
 .wrap-total {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 2rem;
 
   .label {
     font-size: 1.2rem;
     font-weight: 400;
+    color: var(--secondary-text);
   }
   .total {
     font-size: 2rem;
     font-weight: 800;
+    line-height: 100%;
+    color: var(--base-text);
   }
 }
 </style>
