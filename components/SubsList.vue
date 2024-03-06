@@ -1,31 +1,59 @@
 <template>
   <div v-if="services" class="wrap-services">
     <p class="title">My subscriptions</p>
-    <ul v-for="(item, index) in services" :key="index" class="wrap-services">
-      <li class="service">
-        <div class="wrap-service">
-          <img class="service-icon" :src="getIcon(item.service_id)" alt="" />
-          <p class="service-name">{{ item.service_name }}</p>
+    <ul v-for="(item, index) in services" :key="index">
+      <li
+        @click="toggleExpand(item.id)"
+        class="service-card"
+        :class="{ expanded: isExpanded(item.id) }"
+      >
+        <div class="collapsed">
+          <div class="wrap-service-name">
+            <img :src="getIcon(item.service_id)" alt="" />
+            <p>{{ item.service_name }}</p>
+          </div>
+          <div class="wrap-cost">
+            <p class="sevice-cost">R${{ item.service_cost.toFixed(2) }}</p>
+          </div>
         </div>
-        <div class="wrap-content">
-          <!-- <p class="service-due">{{ item.service_due }}</p> -->
-          <p class="sevice-cost">R${{ item.service_cost.toFixed(2) }}</p>
-        </div>
+        <transition name="appear">
+          <div v-show="isExpanded(item.id)" class="expanded">
+            <p class="label">Next charge</p>
+            <p class="service-due">{{ item.service_due }}</p>
+          </div>
+        </transition>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-
 const props = defineProps({
   services: Array,
   item: Object,
 });
 
-let icons = ref({});
+let expandedItems = ref<Record<string, boolean>>({});
 
+const toggleExpand = (id: string) => {
+  if (expandedItems.value[id]) {
+    // If the clicked item is already open, close it
+    expandedItems.value[id] = false;
+  } else {
+    // Close all items
+    for (const key in expandedItems.value) {
+      expandedItems.value[key] = false;
+    }
+    // Open the clicked item
+    expandedItems.value[id] = true;
+  }
+};
+
+const isExpanded = (id: string) => {
+  return expandedItems.value[id];
+};
+
+let icons = ref({});
 const iconImports = import.meta.glob("~/assets/icons/*.png");
 
 onMounted(async () => {
@@ -46,25 +74,48 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
     color: var(--secondary-text);
     margin-bottom: 1rem;
   }
-  .service {
+
+  .service-card {
+    max-height: 100px;
+    transition: max-height 0.15s ease-out;
+  }
+  .service-card.expanded {
+    max-height: 200px;
+  }
+
+  .service-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 1.6rem;
-
     margin: 1rem 0;
     border-radius: 8px;
     background-color: var(--surface);
+    cursor: pointer;
 
-    .wrap-service {
+    .collapsed {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1.6rem;
+    }
+
+    .wrap-service-name {
       display: flex;
       align-items: center;
       gap: 1rem;
 
-      .service-icon {
+      img {
         width: 40px;
         height: 40px;
         border-radius: 0.4rem;
+      }
+      p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--base-text);
       }
       .netflix {
         background-color: #e50914;
@@ -81,24 +132,49 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
         color: var(--base-text);
       }
     }
-    .wrap-content {
+    .wrap-cost {
       display: flex;
       align-items: center;
       gap: 1.6rem;
       font-size: 1.2rem;
       font-weight: 400;
 
-      .service-due {
-        font-size: 0.8rem;
-        color: var(--secondary-text);
-        border: 1px solid var(--border);
-        padding: 0.2rem 0.8rem;
-        border-radius: 56px;
-        background-color: var(--surface);
-      }
       .sevice-cost {
         font-size: 1.2rem;
         font-weight: 800;
+        color: var(--base-text);
+      }
+    }
+
+    .appear-enter-active,
+    .appear-leave-active {
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .appear-enter,
+    .appear-leave-to {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+
+    .expanded {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0.8rem 1.2rem;
+      margin-top: 1.6rem;
+      background-color: var(--card-surface);
+      border-radius: 0.4rem;
+
+      .label {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--secondary-text);
+      }
+
+      .service-due {
+        font-size: 1.2rem;
+        font-weight: 400;
         color: var(--base-text);
       }
     }

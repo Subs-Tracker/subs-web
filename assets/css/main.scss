@@ -12,6 +12,7 @@
 :root {
   --gray100: #171614;
   --gray200: #1d1c19;
+  --gray250: #22211c;
   --gray300: #333333;
   --gray400: #444444;
   --gray500: #555555;
@@ -25,7 +26,8 @@
   --secondary-text: var(--gray900);
   --background: var(--gray100);
   --surface: var(--gray200);
-  --border: var(--gray300);
+  --card-surface: var(--gray250);
+  --border: #2f2f2f;
 }
 
 .light-mode {
@@ -41,6 +43,9 @@ body {
   line-height: 1.5;
   color: var(--base-text);
   background-color: var(--background);
+
+  //Temporarily
+  overflow: hidden;
 }
 
 .page {
