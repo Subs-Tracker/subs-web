@@ -5,4 +5,5 @@ export default defineNuxtConfig({
     "@": resolve(__dirname, "./"),
   },
   css: ["@/assets/css/main.scss"],
+  modules: ["@oku-ui/motion-nuxt"],
 });

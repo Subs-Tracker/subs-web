@@ -1,8 +1,13 @@
 <template>
   <div v-if="services" class="wrap-services">
     <p class="title">My subscriptions</p>
-    <ul v-for="(item, index) in services" :key="index">
+    <!-- <button @click="toggleView">
+      Switch to {{ isGridView ? "list" : "grid" }} view
+    </button> -->
+    <ul :class="{ grid: isGridView }">
       <li
+        v-for="(item, index) in services"
+        :key="index"
         @click="toggleExpand(item.id)"
         class="service-card"
         :class="{ expanded: isExpanded(item.id) }"
@@ -32,6 +37,12 @@ const props = defineProps({
   services: Array,
   item: Object,
 });
+
+let isGridView = ref(false);
+
+const toggleView = () => {
+  isGridView.value = !isGridView.value;
+};
 
 let expandedItems = ref<Record<string, boolean>>({});
 
@@ -75,6 +86,17 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
     margin-bottom: 1rem;
   }
 
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  ul.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+  }
+
   .service-card {
     max-height: 100px;
     transition: max-height 0.15s ease-out;
@@ -89,10 +111,14 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
     align-items: center;
     justify-content: space-between;
     padding: 1.6rem;
-    margin: 1rem 0;
     border-radius: 8px;
     background-color: var(--surface);
     cursor: pointer;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      background-color: var(--card-surface);
+    }
 
     .collapsed {
       display: flex;
@@ -114,7 +140,7 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
       }
       p {
         font-size: 1.2rem;
-        font-weight: 400;
+        font-weight: 300;
         color: var(--base-text);
       }
       .netflix {
@@ -160,10 +186,10 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
     .expanded {
       width: 100%;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       padding: 0.8rem 1.2rem;
       margin-top: 1.6rem;
-      background-color: var(--card-surface);
+      background-color: var(--background);
       border-radius: 0.4rem;
 
       .label {
@@ -173,9 +199,9 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
       }
 
       .service-due {
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: 400;
-        color: var(--base-text);
+        color: var(--secondary-text);
       }
     }
   }

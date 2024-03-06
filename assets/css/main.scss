@@ -2,11 +2,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
+  transition: all 0.3s ease-in-out;
+}
+
+// Reset
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   border: 0;
   padding: 0;
-  transition: all 0.3s ease-in-out;
+  font-weight: normal;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -35,6 +44,8 @@
   --secondary-text: var(--gray300);
   --background: #f2f2f2;
   --surface: #e5e5e5;
+  --card-surface: #d9d9d9;
+  --border: #c2c2c2;
 }
 
 body {
@@ -43,9 +54,17 @@ body {
   line-height: 1.5;
   color: var(--base-text);
   background-color: var(--background);
+  overflow-y: scroll;
 
-  //Temporarily
-  overflow: hidden;
+  // Style scrollbar
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: var(--background);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--surface);
+    border-radius: 56px;
+  }
 }
 
 .page {
