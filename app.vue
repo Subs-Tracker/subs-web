@@ -8,7 +8,7 @@
       </button>
     </header>
     <div class="wrap-total">
-      <p class="label">Total</p>
+      <p class="label">Monthly cost</p>
       <p class="total">{{ "R$" + totalCost.toFixed(2) }}</p>
     </div>
     <SubsList :services="data" />
@@ -34,7 +34,15 @@ onMounted(() => {
 
 const { data } = useSupabase();
 const totalCost = computed(() => {
-  return data.value.reduce((total, item) => total + item.service_cost, 0);
+  return data.value.reduce((total, item) => {
+    if (item.service_charge_frequency === "monthly") {
+      return total + item.service_cost;
+    } else if (item.service_charge_frequency === "yearly") {
+      return total + item.service_cost / 12;
+    } else {
+      return total;
+    }
+  }, 0);
 });
 </script>
 
@@ -79,7 +87,8 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  gap: 0.4rem;
+  margin-bottom: 2.4rem;
 
   .label {
     font-size: 1.2rem;
@@ -87,7 +96,7 @@ header {
     color: var(--secondary-text);
   }
   .total {
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 800;
     line-height: 100%;
     color: var(--base-text);

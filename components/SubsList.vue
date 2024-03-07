@@ -5,28 +5,26 @@
       Switch to {{ isGridView ? "list" : "grid" }} view
     </button> -->
     <ul :class="{ grid: isGridView }">
-      <li
-        v-for="(item, index) in services"
-        :key="index"
-        @click="toggleExpand(item.id)"
-        class="service-card"
-        :class="{ expanded: isExpanded(item.id) }"
-      >
+      <li v-for="(item, index) in services" :key="index" class="service-card">
         <div class="collapsed">
           <div class="wrap-service-name">
             <img :src="getIcon(item.service_id)" alt="" />
-            <p>{{ item.service_name }}</p>
+            <div class="wrap">
+              <p>{{ item.service_name }}</p>
+              <div class="more-info">
+                <!-- <IconsCalendar /> -->
+                <p class="service-due">{{ formatDate(item.service_due) }}</p>
+              </div>
+            </div>
           </div>
           <div class="wrap-cost">
             <p class="sevice-cost">R${{ item.service_cost.toFixed(2) }}</p>
+
+            <p class="charge-frequency">
+              {{ item.service_charge_frequency }}
+            </p>
           </div>
         </div>
-        <transition name="appear">
-          <div v-show="isExpanded(item.id)" class="expanded">
-            <p class="label">Next charge</p>
-            <p class="service-due">{{ item.service_due }}</p>
-          </div>
-        </transition>
       </li>
     </ul>
   </div>
@@ -75,6 +73,13 @@ onMounted(async () => {
 });
 
 const getIcon = (service_id) => icons.value[service_id]?.default;
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const month = date.toLocaleString("default", { month: "short" });
+  const day = date.getDate();
+  return `${month} ${day}`;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -131,18 +136,37 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
     .wrap-service-name {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.6rem;
 
       img {
-        width: 40px;
-        height: 40px;
-        border-radius: 0.4rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 0.6rem;
       }
       p {
         font-size: 1.2rem;
         font-weight: 300;
         color: var(--base-text);
       }
+
+      .more-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8rem;
+        .service-due {
+          font-size: 0.9rem;
+          line-height: 100%;
+          font-weight: 400;
+          color: var(--secondary-text);
+        }
+        svg {
+          width: 16px;
+          height: 16px;
+          stroke: var(--secondary-text);
+        }
+      }
+
       .netflix {
         background-color: #e50914;
       }
@@ -160,15 +184,19 @@ const getIcon = (service_id) => icons.value[service_id]?.default;
     }
     .wrap-cost {
       display: flex;
-      align-items: center;
-      gap: 1.6rem;
-      font-size: 1.2rem;
-      font-weight: 400;
+      flex-direction: column;
+      align-items: flex-end;
 
       .sevice-cost {
         font-size: 1.2rem;
         font-weight: 800;
         color: var(--base-text);
+      }
+
+      .charge-frequency {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--secondary-text);
       }
     }
 
