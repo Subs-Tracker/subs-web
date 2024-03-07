@@ -2,10 +2,10 @@
   <div class="page">
     <header>
       <h1>Subs Tracker</h1>
-      <button @click="toggleDarkMode">
+      <div @click="toggleDarkMode" class="btn">
         <IconsMoon v-if="isDarkMode" />
         <IconsSun v-else />
-      </button>
+      </div>
     </header>
     <div class="wrap-total">
       <p class="label">Monthly cost</p>
@@ -58,7 +58,7 @@ header {
     color: var(--base-text);
   }
 
-  button {
+  .btn {
     display: flex;
     padding: 0.4rem 0.4rem;
     border: none;
