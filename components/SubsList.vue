@@ -123,7 +123,7 @@ const formatDate = (dateString) => {
   .view-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.6rem;
+    gap: 0.8rem;
 
     .service-card {
       position: relative;
@@ -163,7 +163,7 @@ const formatDate = (dateString) => {
   .view-list {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 0.8rem;
   }
 
   .service-card {

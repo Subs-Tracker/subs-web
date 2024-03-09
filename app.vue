@@ -51,11 +51,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 3.2rem;
 
   h1 {
     font-size: 1.2rem;
-    color: var(--base-text);
+    font-weight: 800;
+    color: var(--secondary-text);
   }
 
   .btn {
