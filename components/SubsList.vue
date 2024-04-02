@@ -170,8 +170,8 @@ const formatDate = (dateString) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.6rem;
-    border-radius: 8px;
+    padding: 1.2rem;
+    border-radius: 16px;
     background-color: var(--surface);
     cursor: pointer;
     transition: all 0.15s ease-in-out;
@@ -188,8 +188,8 @@ const formatDate = (dateString) => {
     }
 
     img {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       border-radius: 0.6rem;
     }
     p {
@@ -222,9 +222,9 @@ const formatDate = (dateString) => {
       margin-left: auto;
 
       .cost {
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: var(--base-text);
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: var(--secondary-text);
       }
 
       .charge-frequency {

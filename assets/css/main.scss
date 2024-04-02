@@ -48,9 +48,12 @@
   --border: #c2c2c2;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   font-family: "Work Sans", sans-serif;
-  font-size: 62.5%;
   line-height: 1.5;
   color: var(--base-text);
   background-color: var(--background);
