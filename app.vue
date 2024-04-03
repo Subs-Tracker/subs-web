@@ -52,16 +52,18 @@ header {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3.2rem;
+  padding: 0 0.8rem;
 
   h1 {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: var(--secondary-text);
+    text-transform: uppercase;
   }
 
   .btn {
     display: flex;
-    padding: 0.4rem 0.4rem;
+    padding: 0.8rem 0.8rem;
     border: none;
     border-radius: 56px;
     background-color: var(--surface);
@@ -77,9 +79,9 @@ header {
     }
 
     svg {
-      width: 1.6rem;
-      height: 1.6rem;
-      stroke: var(--base-text);
+      width: 2.4rem;
+      height: 2.4rem;
+      stroke: var(--secondary-text);
     }
   }
 }
@@ -89,18 +91,19 @@ header {
   flex-direction: column;
   justify-content: space-between;
   gap: 0.4rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 3.2rem;
+  padding: 0 0.8rem;
 
   .label {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 400;
     color: var(--secondary-text);
   }
   .total {
-    font-size: 2.4rem;
+    font-size: 3.2rem;
     font-weight: 800;
     line-height: 100%;
-    color: var(--base-text);
+    color: var(--secondary-text);
   }
 }
 </style>

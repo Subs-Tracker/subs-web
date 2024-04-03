@@ -1,7 +1,7 @@
 <template>
   <div v-if="services" class="wrap-services">
     <div class="my-sub-header">
-      <p class="title">My subscriptions</p>
+      <p class="title">My subs</p>
       <div @click="toggleView" class="btn">
         <IconsList v-if="isGridView" />
         <IconsGrid v-else />
@@ -13,12 +13,12 @@
           <img :src="getIcon(item.service_id)" alt="" />
           <div class="service-info">
             <p>{{ item.service_name }}</p>
-            <p class="service-due">{{ formatDate(item.service_due) }}</p>
+            <!-- <p class="service-due">{{ formatDate(item.service_due) }}</p> -->
           </div>
           <div class="service-cost">
             <p class="cost">R${{ item.service_cost.toFixed(2) }}</p>
             <p class="charge-frequency">
-              {{ item.service_charge_frequency }}
+              <!-- {{ item.service_charge_frequency }} -->
             </p>
           </div>
         </div>
@@ -83,25 +83,26 @@ const formatDate = (dateString) => {
 .wrap-services {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2.4rem;
 
   .my-sub-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 0.8rem;
 
     .title {
-      font-size: 1rem;
+      font-size: 1.6rem;
       font-weight: 400;
       color: var(--secondary-text);
     }
 
     .btn {
       display: flex;
-      padding: 0.4rem 0.4rem;
+      padding: 0.8rem 0.8rem;
       border: none;
       border-radius: 56px;
-      color: var(--base-text);
+      background-color: var(--surface);
       cursor: pointer;
       transform: translateY(0);
       transition: transform opacity 0.15s ease-in-out;
@@ -113,9 +114,9 @@ const formatDate = (dateString) => {
       }
 
       svg {
-        width: 1.6rem;
-        height: 1.6rem;
-        stroke: var(--base-text);
+        width: 2.4rem;
+        height: 2.4rem;
+        stroke: var(--secondary-text);
       }
     }
   }
@@ -193,8 +194,8 @@ const formatDate = (dateString) => {
       border-radius: 0.6rem;
     }
     p {
-      font-size: 1.2rem;
-      font-weight: 300;
+      font-size: 1.6rem;
+      font-weight: 400;
       color: var(--base-text);
     }
 
@@ -203,7 +204,7 @@ const formatDate = (dateString) => {
       flex-direction: column;
 
       .service-due {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
         line-height: 100%;
         font-weight: 400;
         color: var(--secondary-text);
@@ -220,6 +221,7 @@ const formatDate = (dateString) => {
       flex-direction: column;
       align-items: flex-end;
       margin-left: auto;
+      padding-right: 0.8rem;
 
       .cost {
         font-size: 1.4rem;
@@ -228,7 +230,7 @@ const formatDate = (dateString) => {
       }
 
       .charge-frequency {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 400;
         color: var(--secondary-text);
       }
