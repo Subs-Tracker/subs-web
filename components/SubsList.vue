@@ -8,7 +8,11 @@
       </div>
     </div>
     <ul :class="isGridView ? 'view-grid' : 'view-list'">
-      <li v-for="(item, index) in services" :key="index" class="service-card">
+      <li
+        v-for="(item, index) in sortedServices"
+        :key="index"
+        class="service-card"
+      >
         <div class="service">
           <img :src="getIcon(item.service_id)" alt="" />
           <div class="service-info">
@@ -16,7 +20,14 @@
             <!-- <p class="service-due">{{ formatDate(item.service_due) }}</p> -->
           </div>
           <div class="service-cost">
-            <p class="cost">R${{ item.service_cost.toFixed(2) }}</p>
+            <p class="cost">
+              R${{
+                (item.service_charge_frequency === "yearly"
+                  ? item.service_cost / 12
+                  : item.service_cost
+                ).toFixed(2)
+              }}
+            </p>
             <p class="charge-frequency">
               <!-- {{ item.service_charge_frequency }} -->
             </p>
@@ -59,6 +70,7 @@ const isExpanded = (id: string) => {
   return expandedItems.value[id];
 };
 
+// Get service icons
 let icons = ref({});
 const iconImports = import.meta.glob("~/assets/icons/*.png");
 
@@ -77,6 +89,21 @@ const formatDate = (dateString) => {
   const day = date.getDate();
   return `${month} ${day}`;
 };
+
+//Order service list by price
+const sortedServices = computed(() => {
+  return [...props.services].sort((a, b) => {
+    const aCost =
+      a.service_charge_frequency === "yearly"
+        ? a.service_cost / 12
+        : a.service_cost;
+    const bCost =
+      b.service_charge_frequency === "yearly"
+        ? b.service_cost / 12
+        : b.service_cost;
+    return bCost - aCost;
+  });
+});
 </script>
 
 <style lang="scss" scoped>
