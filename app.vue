@@ -1,16 +1,18 @@
 <template>
   <div class="page">
     <header>
-      <h1>Subs Tracker</h1>
-      <div @click="toggleDarkMode" class="btn">
-        <IconsMoon v-if="isDarkMode" />
-        <IconsSun v-else />
+      <div class="wrap-nav">
+        <h1>Subs Tracker</h1>
+        <div @click="toggleDarkMode" class="btn">
+          <IconsMoon v-if="isDarkMode" />
+          <IconsSun v-else />
+        </div>
+      </div>
+      <div class="wrap-total">
+        <p class="label">Monthly cost</p>
+        <p class="total">{{ "R$" + totalCost.toFixed(2) }}</p>
       </div>
     </header>
-    <div class="wrap-total">
-      <p class="label">Monthly cost</p>
-      <p class="total">{{ "R$" + totalCost.toFixed(2) }}</p>
-    </div>
     <SubsList :services="data" />
   </div>
 </template>
@@ -49,61 +51,70 @@ const totalCost = computed(() => {
 <style lang="scss">
 header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 3.2rem;
-  padding: 0 0.8rem;
-
-  h1 {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--secondary-text);
-    text-transform: uppercase;
-  }
-
-  .btn {
-    display: flex;
-    padding: 0.8rem 0.8rem;
-    border: none;
-    border-radius: 56px;
-    background-color: var(--surface);
-    color: var(--base-text);
-    cursor: pointer;
-    transform: translateY(0);
-    transition: transform opacity 0.15s ease-in-out;
-    opacity: 0.7;
-
-    &:hover {
-      transform: translateY(4px);
-      opacity: 1;
-    }
-
-    svg {
-      width: 2.4rem;
-      height: 2.4rem;
-      stroke: var(--secondary-text);
-    }
-  }
-}
-
-.wrap-total {
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 0.4rem;
-  margin-bottom: 3.2rem;
-  padding: 0 0.8rem;
+  padding-top: 2.4rem;
+  background-color: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
-  .label {
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--secondary-text);
+  .wrap-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3.2rem;
+    padding: 0 0.8rem;
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--secondary-text);
+      text-transform: uppercase;
+    }
+
+    .btn {
+      display: flex;
+      padding: 0.8rem 0.8rem;
+      border: none;
+      border-radius: 56px;
+      background-color: var(--surface);
+      color: var(--base-text);
+      cursor: pointer;
+      transform: translateY(0);
+      transition: transform opacity 0.15s ease-in-out;
+      opacity: 0.7;
+
+      &:hover {
+        transform: translateY(4px);
+        opacity: 1;
+      }
+
+      svg {
+        width: 2.4rem;
+        height: 2.4rem;
+        stroke: var(--secondary-text);
+      }
+    }
   }
-  .total {
-    font-size: 3.2rem;
-    font-weight: 800;
-    line-height: 100%;
-    color: var(--secondary-text);
+  .wrap-total {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+    margin-bottom: 3.2rem;
+    padding: 0 0.8rem;
+
+    .label {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--secondary-text);
+    }
+    .total {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 100%;
+      color: var(--secondary-text);
+    }
   }
 }
 </style>
