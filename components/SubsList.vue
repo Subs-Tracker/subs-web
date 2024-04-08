@@ -1,13 +1,6 @@
 <template>
   <div v-if="services" class="wrap-services">
-    <div class="my-sub-header">
-      <p class="title">My subs</p>
-      <div @click="toggleView" class="btn">
-        <IconsList v-if="isGridView" />
-        <IconsGrid v-else />
-      </div>
-    </div>
-    <ul :class="isGridView ? 'view-grid' : 'view-list'">
+    <ul class="view-list">
       <li
         v-for="(item, index) in sortedServices"
         :key="index"

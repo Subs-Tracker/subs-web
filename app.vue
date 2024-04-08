@@ -13,7 +13,14 @@
         <p class="total">{{ "R$" + totalCost.toFixed(2) }}</p>
       </div>
     </header>
+    <div class="my-sub-header">
+      <p class="title">My subs</p>
+      <div class="btn">
+        <IconsAdd />
+      </div>
+    </div>
     <SubsList :services="data" />
+    <div class="footer"></div>
   </div>
 </template>
 
@@ -71,30 +78,6 @@ header {
       color: var(--secondary-text);
       text-transform: uppercase;
     }
-
-    .btn {
-      display: flex;
-      padding: 0.8rem 0.8rem;
-      border: none;
-      border-radius: 56px;
-      background-color: var(--surface);
-      color: var(--base-text);
-      cursor: pointer;
-      transform: translateY(0);
-      transition: transform opacity 0.15s ease-in-out;
-      opacity: 0.7;
-
-      &:hover {
-        transform: translateY(4px);
-        opacity: 1;
-      }
-
-      svg {
-        width: 2.4rem;
-        height: 2.4rem;
-        stroke: var(--secondary-text);
-      }
-    }
   }
   .wrap-total {
     display: flex;
@@ -116,5 +99,22 @@ header {
       color: var(--secondary-text);
     }
   }
+}
+.my-sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.8rem;
+  margin-bottom: 1.6rem;
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--secondary-text);
+  }
+}
+.footer {
+  height: 6.4rem;
+  background-color: var(--background);
 }
 </style>
