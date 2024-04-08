@@ -15,10 +15,12 @@
     </header>
     <div class="my-sub-header">
       <p class="title">My subs</p>
-      <div class="btn">
-        <IconsAdd />
-      </div>
+      <button class="btn" @click="showModal = true"><IconsAdd /></button>
     </div>
+    <ModalView :showModal="showModal" @close-modal="showModal = false">
+      <h2>Add a new subscription</h2>
+      <p>Service name</p>
+    </ModalView>
     <SubsList :services="data" />
     <div class="footer"></div>
   </div>
@@ -53,6 +55,8 @@ const totalCost = computed(() => {
     }
   }, 0);
 });
+
+const showModal = ref(false);
 </script>
 
 <style lang="scss">
