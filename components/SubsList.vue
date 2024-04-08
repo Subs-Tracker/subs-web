@@ -6,25 +6,23 @@
         :key="index"
         class="service-card"
       >
-        <div class="service">
-          <img :src="getIcon(item.service_id)" alt="" />
-          <div class="service-info">
-            <p>{{ item.service_name }}</p>
-            <!-- <p class="service-due">{{ formatDate(item.service_due) }}</p> -->
-          </div>
-          <div class="service-cost">
-            <p class="cost">
-              R${{
-                (item.service_charge_frequency === "yearly"
-                  ? item.service_cost / 12
-                  : item.service_cost
-                ).toFixed(2)
-              }}
-            </p>
-            <p class="charge-frequency">
-              <!-- {{ item.service_charge_frequency }} -->
-            </p>
-          </div>
+        <img :src="getIcon(item.service_id)" alt="" />
+        <div class="service-info">
+          <p>{{ item.service_name }}</p>
+          <!-- <p class="service-due">{{ formatDate(item.service_due) }}</p> -->
+        </div>
+        <div class="service-cost">
+          <p class="cost">
+            R${{
+              (item.service_charge_frequency === "yearly"
+                ? item.service_cost / 12
+                : item.service_cost
+              ).toFixed(2)
+            }}
+          </p>
+          <p class="charge-frequency">
+            <!-- {{ item.service_charge_frequency }} -->
+          </p>
         </div>
       </li>
     </ul>
@@ -116,69 +114,6 @@ const sortedServices = computed(() => {
       font-weight: 400;
       color: var(--secondary-text);
     }
-
-    .btn {
-      display: flex;
-      padding: 0.8rem 0.8rem;
-      border: none;
-      border-radius: 56px;
-      background-color: var(--surface);
-      cursor: pointer;
-      transform: translateY(0);
-      transition: transform opacity 0.15s ease-in-out;
-      opacity: 0.7;
-
-      &:hover {
-        transform: translateY(4px);
-        opacity: 1;
-      }
-
-      svg {
-        width: 2.4rem;
-        height: 2.4rem;
-        stroke: var(--secondary-text);
-      }
-    }
-  }
-
-  .view-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-
-    .service-card {
-      position: relative;
-
-      .service {
-        display: grid;
-        grid-template-areas:
-          "top-left top-right"
-          "bottom bottom";
-        grid-template-columns: 6fr 1fr;
-        grid-template-rows: 1fr;
-        align-items: flex-start;
-        gap: 2.4rem;
-
-        p {
-          line-height: 120%;
-        }
-
-        img {
-          grid-area: top-right;
-        }
-        .service-info {
-          grid-area: top-left;
-          gap: 0.4rem;
-        }
-        .service-cost {
-          grid-area: bottom;
-          flex-direction: row-reverse;
-          justify-content: space-between;
-          gap: 0.8rem;
-          margin-left: 0;
-        }
-      }
-    }
   }
 
   .view-list {
@@ -191,6 +126,7 @@ const sortedServices = computed(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.6rem;
     padding: 1.2rem;
     border-radius: 16px;
     background-color: var(--surface);
@@ -199,13 +135,6 @@ const sortedServices = computed(() => {
 
     &:hover {
       background-color: var(--card-surface);
-    }
-
-    .service {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      gap: 1.6rem;
     }
 
     img {
